@@ -49,6 +49,8 @@ class FileLister {
 
 class FileUploader {
     private $uploadDir;
+    const MAX_IMAGE_SIZE = 10 * 1024 * 1024; // 10MB
+    const MAX_VIDEO_SIZE = 50 * 1024 * 1024; // 50MB
 
     public function __construct($uploadDir) {
         $this->uploadDir = $uploadDir;
@@ -73,8 +75,17 @@ class FileUploader {
 
         $fileName = $file['name'];
         $fileType = $file['type'];
+        $fileSize = $file['size'];
         $fileTmpPath = $file['tmp_name'];
         $uniqueFileName = uniqid() . '_' . $fileName;
+
+        if (($fileType === 'image/jpeg' || $fileType === 'image/png') && $fileSize > self::MAX_IMAGE_SIZE) {
+            return 'Error: Image file size exceeds the limit of 10MB';
+        }
+
+        if ($fileType === 'video/mp4' && $fileSize > self::MAX_VIDEO_SIZE) {
+            return 'Error: Video file size exceeds the limit of 50MB';
+        }
 
         if (!move_uploaded_file($fileTmpPath, $this->uploadDir . '/' . $uniqueFileName)) {
             return 'Error: failed to move uploaded file.';
