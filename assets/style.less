@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+
+@textColour: #474747;
+@textFont: 'Abel', sans-serif;
+@fontSize: 14px;
+
+@colourBorder: #F4F4F2;
+
+@colourLightGrey: #F2F2F2;
+@colourGrey: #C4C4C4;
+@colourDarkGrey: #4D4D4D;
+@colourWhite: #FFF;
+
+body {
+    color: @textColour;
+    font-family: @textFont;
+
+    p {
+        font-size: @fontSize;
+    }
+
+
+    header {
+        .logo {
+            height: 391px;
+            width: 100%;
+
+            object-fit: cover;
+            border-radius: 15px;
+            filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+        }
+    }
+
+    main {
+        .upload {
+            background-color: @colourLightGrey;
+            border: 1px dashed @colourGrey;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 10px;
+        }
+
+        .navigation {
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .media {
+            .element {
+                border: 1.4px solid @colourBorder;
+                padding: 8px;
+                border-radius: 5px;
+                margin: 0.5rem 1rem;
+                cursor: pointer;
+
+                >div {
+                    height: 150px;
+                }
+
+                img {
+                    width: 100%;
+                    height: 100%;
+
+                    object-fit: cover;
+                    border-radius: 5px;
+                }
+
+                .description {
+                    h2 {
+                        font-size: 19px;
+                    }
+
+                    .meta {
+                        font-size: 12.75px;
+                        position: absolute;
+                        bottom: 0;
+
+                        ul {
+                            padding-left: 1rem;
+                            margin-bottom: 0;
+                        }
+                    }
+                }
+            }
+
+            &.video {
+                .media-wrapper::before {
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    width: 40px;
+                    height: 40px;
+
+                    content: ' ';
+                    display: block;
+                    position: absolute;
+                    background-image: url("/assets/images/play.svg");
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    pointer-events: none;
+                }
+            }
+        }
+    }
+
+    .flex-center {
+        display: flex;
+
+        justify-content: center;
+        align-items: center;
+    }
+
+    .btn {
+        font-size: 13px;
+
+        &.btn-primary {
+            width: 300px;
+            background-color: @colourDarkGrey;
+            color: @colourWhite;
+            border: 0;
+        }
+
+        &.btn-secondary {
+            width: 250px;
+            background-color: @colourLightGrey;
+            color: @textColour;
+            border: 0;
+
+            img {
+                display: inline;
+                margin-right: 0.5rem;
+                height: 20px;
+                width: 20px;
+            }
+        }
+
+        &.processing {
+            pointer-events: none;
+            opacity: 0.5;
+        }
+    }
+
+    .upload-notification {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        z-index: 99;
+        text-align: center;
+        width: 100vw;
+        background-color: @colourGrey;
+        padding: 10px;
+
+        &.active {
+            display: block;
+        }
+    }
+}
